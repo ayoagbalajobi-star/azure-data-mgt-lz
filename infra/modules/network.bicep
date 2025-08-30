@@ -6,6 +6,8 @@
 targetScope = 'resourceGroup'
 
 // Parameters
+param existingVnetName string
+param existingVnetResourceGroupName string
 param location string
 param prefix string
 param tags object
@@ -207,14 +209,15 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2020-11-01' = {
 }
 
 resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
-  name: '${prefix}-vnet'
-  location: location
-  tags: tags
-  properties: {
-    addressSpace: {
-      addressPrefixes: [
-        vnetAddressPrefix
-      ]
+  name: 'vnet-wus2-EDIS'
+  scope: resourceGroup(rg-wus2-EDIS-network)
+//  location: location
+//  tags: tags
+//  properties: {
+//    addressSpace: {
+//      addressPrefixes: [
+//        vnetAddressPrefix
+//      ]
     }
     dhcpOptions: {
       dnsServers: enableDnsAndFirewallDeployment ? [] : dnsServerAdresses
@@ -223,6 +226,14 @@ resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' = {
     subnets: subnets
   }
 }
+
+// Reference existing subnet instead of creating
+resource servicesSubnet 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' existing = {
+  name: snet-wus2-EDIS
+  parent: vnet
+}
+
+param existingServicesSubnetName string
 
 resource publicIpPrefixes 'Microsoft.Network/publicIPPrefixes@2020-11-01' = if(enableDnsAndFirewallDeployment) {
   name: '${prefix}-publicipprefix'
