@@ -5,6 +5,21 @@
         "location": {
             "value": "northeurope"
         },
+        "useExistingVnet": {
+      "value": true
+    },
+    "existingVnetResourceGroupName": {
+      "value": "rg-wus2-EDIS-network"
+    },
+    "existingVnetName": {
+      "value": "vnet-wus2-EDIS"
+    },
+    "existingSubnetName": {
+      "value": "snet-wus2-EDIS"
+    },
+    "existingVnetSubscriptionId": {
+      "value": "8eb9aa17-229e-4e44-887e-91df00b4207f"
+    },
         "environment": {
             "value": "dev"
         },
@@ -18,13 +33,13 @@
             "value": []
         },
         "vnetAddressPrefix": {
-            "value": "10.0.0.0/16"
+            "value": "10.187.96.0/23"
         },
         "azureFirewallSubnetAddressPrefix": {
             "value": "10.0.0.0/24"
         },
         "servicesSubnetAddressPrefix": {
-            "value": "10.0.1.0/24"
+            "value": "10.187.96.0/24"
         },
         "enableDnsAndFirewallDeployment": {
             "value": true
