@@ -25,14 +25,26 @@ param tags object = {}
 param purviewRootCollectionAdminObjectIds array = []
 
 // Network parameters
+@description('Use existing VNet instead of creating new one')
+param useExistingVnet bool = true
+
+@description('Existing VNet name')
+param existingVnetName string = 'vnet-wus2-EDIS'
+
+@description('Existing VNet resource group name')  
+param existingVnetResourceGroupName string = 'rg-wus2-EDIS-network'
+
+@description('Existing services subnet name')
+param existingServicesSubnetName string = 'snet-wus2-EDIS'
+
 @description('Specifies whether firewall and private DNS Zones should be deployed.')
 param enableDnsAndFirewallDeployment bool = true
-@description('Specifies the address space of the vnet.')
-param vnetAddressPrefix string = '10.0.0.0/16'
+//@description('Specifies the address space of the vnet.')
+//param vnetAddressPrefix string = '10.0.0.0/16'
 @description('Specifies the address space of the subnet that is use for Azure Firewall. Optional if `enableDnsAndFirewallDeployment` is set to `true`.')
 param azureFirewallSubnetAddressPrefix string = '10.0.0.0/24'
-@description('Specifies the address space of the subnet that is used for the services.')
-param servicesSubnetAddressPrefix string = '10.0.1.0/24'
+//@description('Specifies the address space of the subnet that is used for the services.')
+//param servicesSubnetAddressPrefix string = '10.0.1.0/24'
 @description('Specifies the private IP address of the central firewall. Optional if `enableDnsAndFirewallDeployment` is set to `true`.')
 param firewallPrivateIp string = '10.0.0.4'
 @description('Specifies the private IP addresses of the dns servers. Optional if `enableDnsAndFirewallDeployment` is set to `true`.')
